@@ -1,0 +1,104 @@
+---
+title: "homework-week-4"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+#What is the probability that she will hear more than 8 calls during any given session
+```{r}
+ProbabilityOfXGreaterThan8 <- ppois(8, lambda=15, lower=FALSE) #We used this function to find the P(x>8)
+ProbabilityOfXGreaterThan8
+```
+#What is the probability that she will hear no calls in a session?
+```{r}
+ProbabilityOfXEquales0 <- ppois(0, lambda=15, lower=TRUE) #for this problem we will use the the same equation becuase we cannot have less than zero calles and we will take the lower tail which is less than zero but becuase we can't have that we get exactly 0
+ProbabilityOfXEquales0
+```
+#What is the probability that she will hear exactly 3 calls in a session
+```{r}
+ProbabilityOfXEquales3 <- (ppois(4, lambda=15, lower=TRUE))-(ppois(2, lambda=15, lower=TRUE))#here I took the difference of P(X<4) and P(X<2). this then gave me then gave me what wwas left which was exactly P(X=3) becaue we need are only looking at whole numbers
+ProbabilityOfXEquales3
+```
+#Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30
+```{r}
+x <- 0:30
+l = 15
+probset <- dpois(x = x, lambda = l)
+barplot(probset, names.arg = x, space = 0, xlab = "x", ylab = "Pr(X = x)", xlim= c(0,30), main = "Probability Mass Function")
+```
+#Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions)
+```{r}
+library(manipulate)
+outcomes <- c(0:30)
+manipulate(hist(sample(outcomes, n, replace = TRUE), breaks = seq(0,30,1), col= "blue", probability = TRUE, main = paste("Histogram of Outcomes of ", n, " Days of Listining", sep = ""), xlab = "Number of Calls", ylab = "probability"), n = slider(0, 10000, initial = 104, step = 100))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
