@@ -1,0 +1,378 @@
+---
+title: "Module-8-Zombie"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+#Zombie
+```{r}
+library(curl)
+f <- f <- curl("https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN597_Fall17/zombies.csv")
+d <- read.csv(f, header = TRUE, sep = ",", stringsAsFactors = FALSE)
+head(d)
+```
+#Zombie[1]
+```{r}
+h <- d$height
+meanh <- mean(h)
+meanh
+```
+above is the mean height of the population
+```{r}
+pop_v <- function(h) {
+    sum((h - mean(h))^2)/(length(h))
+}
+pop_sd <- function(h) {
+    sqrt(pop_v(h))
+}
+pop_sd(h)
+```
+above is the poulation SD for height
+```{r}
+w <- d$weight
+meanw <- mean(w)
+meanw
+```
+above is the mean weight
+```{r}
+pop_v <- function(w) {
+    sum((w - mean(w))^2)/(length(w))
+}
+pop_sd <- function(w) {
+    sqrt(pop_v(w))
+}
+pop_sd(w)
+```
+above is the population SD for weight
+
+```{r}
+a <- d$age
+meana <- mean(a)
+meana
+```
+above is the mean age
+
+```{r}
+pop_v <- function(a) {
+    sum((a - mean(a))^2)/(length(a))
+}
+pop_sd <- function(a) {
+    sqrt(pop_v(a))
+}
+pop_sd(a)
+```
+above is the population SD for age
+
+```{r}
+z <- d$zombies_killed
+meanz <- mean(z)
+meanz
+```
+above is the mean number of zombies killed
+
+```{r}
+pop_v <- function(z) {
+    sum((z - mean(z))^2)/(length(z))
+}
+pop_sd <- function(z) {
+    sqrt(pop_v(z))
+}
+pop_sd(z)
+```
+above is the population SD for number of zombies killed
+
+```{r}
+y <- d$years_of_education
+meany <- mean(y)
+meany
+```
+above is the mean of the years of education
+
+```{r}
+pop_v <- function(y) {
+    sum((y - mean(y))^2)/(length(y))
+}
+pop_sd <- function(y) {
+    sqrt(pop_v(y))
+}
+pop_sd(y)
+```
+above is the population SD for years of education
+
+#Zombie[2]
+
+```{r}
+ph <- ggplot(data = d, aes(x = gender, y =height))
+ph <- ph + geom_boxplot()
+ph <- ph + theme(axis.text.x = element_text(angle = 90))
+ph <- ph + ylab("height")
+ph
+```
+above is the boxplot for height
+```{r}
+pw <- ggplot(data = d, aes(x = gender, y =weight))
+pw <- pw + geom_boxplot()
+pw <- pw + theme(axis.text.x = element_text(angle = 90))
+pw <- pw + ylab("weight")
+pw
+```
+above is the boxplot for weight
+```{r}
+pa <- ggplot(data = d, aes(x = gender, y =age))
+pa <- pa + geom_boxplot()
+pa <- pa + theme(axis.text.x = element_text(angle = 90))
+pa <- pa + ylab("age")
+pa
+```
+above is the boxplot for age
+```{r}
+pz <- ggplot(data = d, aes(x = gender, y =zombies_killed))
+pz <- pz + geom_boxplot()
+pz <- pz + theme(axis.text.x = element_text(angle = 90))
+pz <- pz + ylab("number of zombies killed")
+pz
+```
+above is the boxplot for the the number of zombies killed
+```{r}
+py <- ggplot(data = d, aes(x = gender, y =years_of_education))
+py <- py + geom_boxplot()
+py <- py + theme(axis.text.x = element_text(angle = 90))
+py <- py + ylab("years of education")
+py
+```
+above is the boxplot for years of education
+
+#Zombies[3]
+```{r}
+psh <- ggplot(data = d, aes(x = age, y = height))  
+psh <- psh + xlab("age") + ylab("height")  
+psh <- psh + geom_point()  
+psh <- psh + theme(legend.position = "bottom", legend.title = element_blank())  
+psh
+
+psw <- ggplot(data = d, aes(x = age, y = weight))  
+psw <- psw + xlab("age") + ylab("weight")  
+psw <- psw + geom_point()  
+psw <- psw + theme(legend.position = "bottom", legend.title = element_blank())  
+psw
+```
+The variable of hight andand weight to age both seem to be related. As age increases so does height. It looks like a positive linear coralation.  
+
+#Zombie[4]
+```{r}
+minh <- min(d$height)
+minh
+
+maxh <- max(d$height)
+maxh
+```
+here I took the min and hax for height so I could make my histograms
+```{r}
+qqnorm(d$height, main="normal QQ plot for height")
+qqline(d$height, col="blue")
+hist(d$height, breaks = seq(from =50, to =100, by=5), probability= TRUE)
+```
+The distrabutioin above for height looks normal
+```{r}
+minw <- min(d$weight)
+minw
+
+maxw <- max(d$weight)
+maxw
+```
+```{r}
+qqnorm(d$weight, main="normal QQ plot for weight")
+qqline(d$weight, col="blue")
+hist(d$weight, breaks = seq(from =80, to =250, by=5), probability= TRUE)
+```
+The distrabutioin above for weight looks normal
+
+```{r}
+mina <- min(d$age)
+mina
+
+maxa <- max(d$age)
+maxa
+```
+```{r}
+qqnorm(d$age, main="normal QQ plot for age")
+qqline(d$age, col="blue")
+hist(d$age, breaks = seq(from =5, to =35, by=1), probability= TRUE)
+```
+The distrabutioin above for age looks normal
+
+```{r}
+minz <- min(d$zombies_killed)
+minz
+
+maxz <- max(d$zombies_killed)
+maxz
+```
+```{r}
+qqnorm(d$zombies_killed, main="normal QQ plot for Zombies killed")
+qqline(d$zombies_killed, col="blue")
+hist(d$zombies_killed, breaks = seq(from =0, to =11, by=1), probability= TRUE)
+```
+The distrabutioin above for number of zombies looks poisson
+
+```{r}
+minz <- min(d$years_of_education)
+minz
+
+maxz <- max(d$years_of_education)
+maxz
+```
+```{r}
+qqnorm(d$years_of_education, main="normal QQ plot for years of education")
+qqline(d$years_of_education, col="blue")
+hist(d$years_of_education, breaks = seq(from =0, to =11, by=1), probability= TRUE)
+```
+The distrabutioin above for number of zombies looks poisson
+#Zombies[5]
+```{r}
+samp <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
+samp
+```
+above is the sample data from d
+```{r}
+samph <- samp$height
+meansh <- mean(samph)
+meansh
+
+sampvarh <- var(samph)
+sampSDh <- sqrt(sampvarh)
+sampSDh
+
+sampSEh <- sqrt(sampvarh/30)
+sampSEh
+
+upperh <- qnorm( 0.95, mean=meansh, sd=sampSDh)
+upperh
+
+lowerh <- qnorm( 0.05, mean=meansh, sd=sampSDh)
+lowerh
+
+cih <- c(lowerh, upperh)
+cih
+```
+above are the sample SD and sample mean, sample SE, and the CI is 61.42163 to 74.47413 of height, 
+```{r}
+sampw <- samp$weight
+meansw <- mean(sampw)
+meansw
+
+sampvarw <- var(sampw)
+sampSDw <- sqrt(sampvarw)
+sampSDw
+
+sampSEw <- sqrt(sampvarw/30)
+sampSEw
+
+upperw <- qnorm( 0.95, mean=meansw, sd=sampSDw)
+upperw
+
+lowerw <- qnorm( 0.05, mean=meansw, sd=sampSDw)
+lowerw
+
+ciw <- c(lowerw, upperw)
+ciw
+```
+
+above are the sample SD, sample mean, sample SE and the CI is from 100.1978 to 176.3308 of weight
+```{r}
+sampa <- samp$age
+meansa <- mean(sampa)
+meansa
+
+sampvara <- var(sampa)
+sampSDa <- sqrt(sampvara)
+sampSDa
+
+sampSEa <- sqrt(sampvara/30)
+sampSEa
+
+uppera <- qnorm( 0.95, mean=meansa, sd=sampSDa)
+uppera
+
+lowera <- qnorm( 0.05, mean=meansa, sd=sampSDa)
+lowera
+
+cia <- c(lowera, uppera)
+cia
+```
+above are the sample SD sample mean, SE and the CI is from 14.13943 to 25.17132f of age
+```{r}
+sampz <- samp$zombies_killed
+meansz <- mean(sampz)
+meansz
+
+sampvarz <- var(sampz)
+sampSDz <- sqrt(sampvarz)
+sampSDz
+
+
+```
+above are the sample SD and mean of zombies killed
+```{r}
+sampy <- samp$years_of_education 
+meansy <- mean(sampy)
+meansy
+
+sampvary <- var(sampy)
+sampSDy <- sqrt(sampvary)
+sampSDy
+
+#need to do the special thing for not-normal
+
+
+```
+above are the sample SD and mean of years of education
+
+#Zombie[6]
+```{r}
+x <- samp$height
+m <- mean(x)
+v <- var(x)
+stdv <- sqrt(v)
+
+n <- 30  # size of each sample
+set <- NULL  # dummy variable to hold each sample
+for (i in 1:99) {
+    set[[i]] <- sample(x, n, replace = TRUE)}
+
+s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
+s
+
+#where t is equal to the combined mean of the heights
+t <- mean(set, na.rm = TRUE)
+t
+```
+
+
+
+
+
+
