@@ -333,9 +333,17 @@ sampvarz <- var(sampz)
 sampSDz <- sqrt(sampvarz)
 sampSDz
 
+lambdaz <- (sum(sampz)/30)
+lengthz <- length(sampz)
+sez <- sqrt(lambdaz/lengthz)
+sez
+upperz <- lambdaz+ 1.96*sez
+lowerz <- lambdaz- 1.96*sez
+ciz <- c(lowerz, upperz)
+ciz
 
 ```
-above are the sample SD and mean of zombies killed
+above are the sample SD mean, se and the ci is from 2.49903 to 3.766764 of zombies killed
 ```{r}
 sampy <- samp$years_of_education 
 meansy <- mean(sampy)
@@ -345,11 +353,16 @@ sampvary <- var(sampy)
 sampSDy <- sqrt(sampvary)
 sampSDy
 
-#need to do the special thing for not-normal
-
-
+lambday <- (sum(sampy)/30)
+lengthy <- length(sampy)
+sey <- sqrt(lambday/lengthy)
+sey
+uppery <- lambday+ 1.96*sey
+lowery <- lambday- 1.96*sey
+ciy <- c(lowery, uppery)
+ciy
 ```
-above are the sample SD and mean of years of education
+above are the sample mean, sd, se and the ci is from 2.320452 to 3.546214 of years of education
 
 #Zombie[6]
 ```{r}
@@ -367,12 +380,96 @@ s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
 s
 
 #where t is equal to the combined mean of the heights
-t <- mean(set, na.rm = TRUE)
+#where t is equal to the combined mean of the heights
+t <- (99*mean(set)+1*m)/100
 t
+#where g is equal to the combined sd of height
+g <- sqrt(((99-1)*var(set))+((1-1)*v)/(100-2))
+g
 ```
+I keep gettingt this error on every single time I try it so this is what should work or at least that what wverywhere I looked said but I just can't quite get it, I even tried to use the na.rm = TRUE but couldnt get that to work so I dont know what to do. This then makes it difficult to answer the rest of the questions that are in problem 6
+```{r}
+x <- samp$weight
+m <- mean(x)
+v <- var(x)
+stdv <- sqrt(v)
 
+n <- 30  # size of each sample
+set <- NULL  # dummy variable to hold each sample
+for (i in 1:99) {
+    set[[i]] <- sample(x, n, replace = TRUE)}
 
+s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
+s
 
+#where t is equal to the combined mean of the weight
+t <- (99*mean(set)+1*m)/100
+t
+#where g is equal to the combined sd of weight
+g <- sqrt(((99-1)*var(set))+((1-1)*v)/(100-2))
+g
+```
+```{r}
+x <- samp$age
+m <- mean(x)
+v <- var(x)
+stdv <- sqrt(v)
 
+n <- 30  # size of each sample
+set <- NULL  # dummy variable to hold each sample
+for (i in 1:99) {
+    set[[i]] <- sample(x, n, replace = TRUE)}
 
+s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
+s
+
+#where t is equal to the combined mean of the age
+t <- (99*mean(set)+1*m)/100
+t
+#where g is equal to the combined sd of height
+g <- sqrt(((99-1)*var(set))+((1-1)*v)/(100-2))
+g
+```
+```{r}
+x <- samp$zombies_killed
+m <- mean(x)
+v <- var(x)
+stdv <- sqrt(v)
+
+n <- 30  # size of each sample
+set <- NULL  # dummy variable to hold each sample
+for (i in 1:99) {
+    set[[i]] <- sample(x, n, replace = TRUE)}
+
+s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
+s
+
+#where t is equal to the combined mean of the zombies killed
+t <- (99*mean(set)+1*m)/100
+t
+#where g is equal to the combined sd of height
+g <- sqrt(((99-1)*var(set))+((1-1)*v)/(100-2))
+g
+```
+```{r}
+x <- samp$years_of_education
+m <- mean(x)
+v <- var(x)
+stdv <- sqrt(v)
+
+n <- 30  # size of each sample
+set <- NULL  # dummy variable to hold each sample
+for (i in 1:99) {
+    set[[i]] <- sample(x, n, replace = TRUE)}
+
+s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
+s
+
+#where t is equal to the combined mean of the years of education
+t <- (99*mean(set)+1*m)/100
+t
+#where g is equal to the combined sd of height
+g <- sqrt(((99-1)*var(set))+((1-1)*v)/(100-2))
+g
+```
 
