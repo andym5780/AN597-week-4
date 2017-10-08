@@ -3,30 +3,6 @@ title: "Module-8-Zombie"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
 #Zombie
 ```{r}
 library(curl)
@@ -366,110 +342,81 @@ above are the sample mean, sd, se and the ci is from 2.320452 to 3.546214 of yea
 
 #Zombie[6]
 ```{r}
-x <- samp$height
-m <- mean(x)
-v <- var(x)
-stdv <- sqrt(v)
+new30height <- NULL
+for (i in 1:100) {
+    new30height[i] <- mean(sample(d$height,30))
+}
 
-n <- 30  # size of each sample
-set <- NULL  # dummy variable to hold each sample
-for (i in 1:99) {
-    set[[i]] <- sample(x, n, replace = TRUE)}
-
-s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
-s
-
-#where t is equal to the combined mean of the heights
-#where t is equal to the combined mean of the heights
-t <- (99*mean(set)+1*m)/100
-t
-#where g is equal to the combined sd of height
-g <- sqrt(((99-1)*var(set))+((1-1)*v)/(100-2))
-g
+hist(new30height,probability = TRUE)
 ```
-I keep gettingt this error on every single time I try it so this is what should work or at least that what wverywhere I looked said but I just can't quite get it, I even tried to use the na.rm = TRUE but couldnt get that to work so I dont know what to do. This then makes it difficult to answer the rest of the questions that are in problem 6
+this is the random new sample of 30 individuals 100 times for height
 ```{r}
-x <- samp$weight
-m <- mean(x)
-v <- var(x)
-stdv <- sqrt(v)
-
-n <- 30  # size of each sample
-set <- NULL  # dummy variable to hold each sample
-for (i in 1:99) {
-    set[[i]] <- sample(x, n, replace = TRUE)}
-
-s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
-s
-
-#where t is equal to the combined mean of the weight
-t <- (99*mean(set)+1*m)/100
-t
-#where g is equal to the combined sd of weight
-g <- sqrt(((99-1)*var(set))+((1-1)*v)/(100-2))
-g
+mean(new30height)
+sd(new30height)
 ```
+these are the mean and sd for the new samples of height
 ```{r}
-x <- samp$age
-m <- mean(x)
-v <- var(x)
-stdv <- sqrt(v)
+new30weight <- NULL
+for (i in 1:100) {
+    new30weight[i] <- mean(sample(d$weight,30))
+}
 
-n <- 30  # size of each sample
-set <- NULL  # dummy variable to hold each sample
-for (i in 1:99) {
-    set[[i]] <- sample(x, n, replace = TRUE)}
-
-s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
-s
-
-#where t is equal to the combined mean of the age
-t <- (99*mean(set)+1*m)/100
-t
-#where g is equal to the combined sd of height
-g <- sqrt(((99-1)*var(set))+((1-1)*v)/(100-2))
-g
+hist(new30weight,probability = TRUE)
 ```
+this is the random new sample of 30 individuals 100 times for weight
 ```{r}
-x <- samp$zombies_killed
-m <- mean(x)
-v <- var(x)
-stdv <- sqrt(v)
-
-n <- 30  # size of each sample
-set <- NULL  # dummy variable to hold each sample
-for (i in 1:99) {
-    set[[i]] <- sample(x, n, replace = TRUE)}
-
-s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
-s
-
-#where t is equal to the combined mean of the zombies killed
-t <- (99*mean(set)+1*m)/100
-t
-#where g is equal to the combined sd of height
-g <- sqrt(((99-1)*var(set))+((1-1)*v)/(100-2))
-g
+mean(new30weight)
+sd(new30weight)
 ```
+these are the mean and sd for the new samples of weight
 ```{r}
-x <- samp$years_of_education
-m <- mean(x)
-v <- var(x)
-stdv <- sqrt(v)
+new30age<-NULL
+for (i in 1:100) {
+    new30age[i] <- mean(sample(d$age,30))
+}
 
-n <- 30  # size of each sample
-set <- NULL  # dummy variable to hold each sample
-for (i in 1:99) {
-    set[[i]] <- sample(x, n, replace = TRUE)}
-
-s <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
-s
-
-#where t is equal to the combined mean of the years of education
-t <- (99*mean(set)+1*m)/100
-t
-#where g is equal to the combined sd of height
-g <- sqrt(((99-1)*var(set))+((1-1)*v)/(100-2))
-g
+hist(new30age,probability = TRUE)
 ```
+this is the random new sample of 30 individuals 100 times for age
+```{r}
+mean(new30age)
+sd(new30age)
+```
+these are the mean and sd for the new samples of age
+```{r}
+new30zombieskilled<-NULL
+for (i in 1:100) {
+    new30zombieskilled[i] <- mean(sample(d$zombies_killed,30))
+}
+
+hist(new30zombieskilled,probability = TRUE)
+```
+this is the random new sample of 30 individuals 100 times for number of zombeis killed
+```{r}
+mean(new30zombieskilled)
+sd(new30zombieskilled)
+```
+these are the mean and sd for the new samples of number of zombies killed
+```{r}
+new30education<-NULL
+for (i in 1:100) {
+    new30education[i] <- mean(sample(d$years_of_education,30))
+}
+
+hist(new30education,probability = TRUE)
+```
+this is the random new sample of 30 individuals 100 times for years of education 
+```{r}
+mean(new30education)
+sd(new30education)
+```
+these are the mean and sd for the new samples of years of education
+these new sd are very similar to the se, they are not exact, but they are similar. all of these samples for the most part look normal more or less. Even the variables that looks like a poisson distrabutiom (the number of zombies killed and years of education) are now normal looking after taking the mean and sd of a sample 100 times 
+
+
+
+
+
+
+
 
