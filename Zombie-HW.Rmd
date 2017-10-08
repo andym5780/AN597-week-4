@@ -100,7 +100,7 @@ above is the population SD for years of education
 
 #Zombie[2]
 
-```{r}
+```{r, eval=FALSE}
 ph <- ggplot(data = d, aes(x = gender, y =height))
 ph <- ph + geom_boxplot()
 ph <- ph + theme(axis.text.x = element_text(angle = 90))
@@ -108,7 +108,7 @@ ph <- ph + ylab("height")
 ph
 ```
 above is the boxplot for height
-```{r}
+```{r, eval=FALSE}
 pw <- ggplot(data = d, aes(x = gender, y =weight))
 pw <- pw + geom_boxplot()
 pw <- pw + theme(axis.text.x = element_text(angle = 90))
@@ -116,7 +116,7 @@ pw <- pw + ylab("weight")
 pw
 ```
 above is the boxplot for weight
-```{r}
+```{r, eval=FALSE}
 pa <- ggplot(data = d, aes(x = gender, y =age))
 pa <- pa + geom_boxplot()
 pa <- pa + theme(axis.text.x = element_text(angle = 90))
@@ -124,7 +124,7 @@ pa <- pa + ylab("age")
 pa
 ```
 above is the boxplot for age
-```{r}
+```{r, eval=FALSE}
 pz <- ggplot(data = d, aes(x = gender, y =zombies_killed))
 pz <- pz + geom_boxplot()
 pz <- pz + theme(axis.text.x = element_text(angle = 90))
@@ -132,7 +132,7 @@ pz <- pz + ylab("number of zombies killed")
 pz
 ```
 above is the boxplot for the the number of zombies killed
-```{r}
+```{r, eval=FALSE}
 py <- ggplot(data = d, aes(x = gender, y =years_of_education))
 py <- py + geom_boxplot()
 py <- py + theme(axis.text.x = element_text(angle = 90))
@@ -142,7 +142,7 @@ py
 above is the boxplot for years of education
 
 #Zombies[3]
-```{r}
+```{r, eval=FALSE}
 psh <- ggplot(data = d, aes(x = age, y = height))  
 psh <- psh + xlab("age") + ylab("height")  
 psh <- psh + geom_point()  
