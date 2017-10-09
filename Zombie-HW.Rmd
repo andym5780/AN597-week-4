@@ -17,7 +17,7 @@ meanh <- mean(h)
 meanh
 ```
 above is the mean height of the population, or at least how I calculated it. I am a little confused as to why we need to set up a variable and why we casn't just use the mean tool
-```{r}
+```{r, eval=FALSE}
 lh<-length(d$height) #this is 1000
 nh<-5 #we'll randomly choose samples of 5, like in the module
 dummy_height <- NULL #this is our dummy variable to hold each sample
@@ -26,7 +26,7 @@ for (i in 1:k){
 }
 head(dummy_height)
 ```
-```{r}
+```{r, eval=FALSE}
 pop_height <- NULL
 for (i in 1:k){
     pop_height[i] <- mean(dummy_height[[i]])
@@ -51,7 +51,7 @@ meanw <- mean(w)
 meanw
 ```
 above is the mean weight how I calculated it
-```{r}
+```{r, eval=FALSE}
 lw<-length(d$weight) #this is 1000
 nw<-5 #we'll randomly choose samples of 5, like in the module
 dummy_weight <- NULL #this is our dummy variable to hold each sample
@@ -61,7 +61,7 @@ for (i in 1:k){
 head(dummy_weight)
 ```
 this is how you calculated it
-```{r}
+```{r, eval=FALSE}
 pop_weight <- NULL
 for (i in 1:k){
     pop_weight[i] <- mean(dummy_weight[[i]])
@@ -86,7 +86,7 @@ meana <- mean(a)
 meana
 ```
 above is the mean age that I calculated
-```{r}
+```{r, eval=FALSE}
 la<-length(d$age) #this is 1000
 na<-5 #we'll randomly choose samples of 5, like in the module
 dummy_age <- NULL #this is our dummy variable to hold each sample
@@ -95,7 +95,7 @@ for (i in 1:k){
 }
 head(dummy_age)
 ```
-```{r}
+```{r, eval=FALSE}
 pop_age <- NULL
 for (i in 1:k){
     pop_age[i] <- mean(dummy_age[[i]])
@@ -120,7 +120,7 @@ meanz <- mean(z)
 meanz
 ```
 above is the mean number of zombies killed I calculated
-```{r}
+```{r, eval=FALSE}
 la<-length(d$zombies_killed) #this is 1000
 na<-5 #we'll randomly choose samples of 5, like in the module
 dummy_zombies_killed <- NULL #this is our dummy variable to hold each sample
@@ -129,7 +129,7 @@ for (i in 1:k){
 }
 head(dummy_zombies_killed)
 ```
-```{r}
+```{r, eval=FALSE}
 pop_zombies_killed <- NULL
 for (i in 1:k){
     pop_zombies_killed[i] <- mean(dummy_zombies_killed[[i]])
@@ -153,7 +153,24 @@ y <- d$years_of_education
 meany <- mean(y)
 meany
 ```
-above is the mean of the years of education
+above is the mean of the years of education that I calculated
+```{r, eval=FALSE}
+ly<-length(d$years_of_education) #this is 1000
+ny<-5 #we'll randomly choose samples of 5, like in the module
+dummy_years_of_education <- NULL #this is our dummy variable to hold each sample
+for (i in 1:k){
+    dummy_years_of_education[[i]]<-sample(d$years_of_education,size=n,replace=FALSE)
+}
+head(dummy_years_of_education)
+```
+```{r, eval=FALSE}
+pop_years_of_education<- NULL
+for (i in 1:k){
+    pop_years_of_education[i] <- mean(dummy_years_of_education[[i]])
+}
+mean(pop_years_of_education)
+```
+this is the mean that you told us to calculate
 
 ```{r}
 pop_v <- function(y) {
