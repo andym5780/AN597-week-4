@@ -16,11 +16,29 @@ h <- d$height
 meanh <- mean(h)
 meanh
 ```
-above is the mean height of the population
+above is the mean height of the population, or at least how I calculated it. I am a little confused as to why we need to set up a variable and why we casn't just use the mean tool
+```{r}
+lh<-length(d$height) #this is 1000
+nh<-5 #we'll randomly choose samples of 5, like in the module
+dummy_height <- NULL #this is our dummy variable to hold each sample
+for (i in 1:k){
+    dummy_height[[i]]<-sample(d$height,size=nh,replace=FALSE)
+}
+head(dummy_height)
+```
+```{r}
+pop_height <- NULL
+for (i in 1:k){
+    pop_height[i] <- mean(dummy_height[[i]])
+}
+mean(pop_height)
+```
+this is the the way to sample you tolled us to
 ```{r}
 pop_v <- function(h) {
     sum((h - mean(h))^2)/(length(h))
 }
+pop_v(h)
 pop_sd <- function(h) {
     sqrt(pop_v(h))
 }
@@ -32,7 +50,25 @@ w <- d$weight
 meanw <- mean(w)
 meanw
 ```
-above is the mean weight
+above is the mean weight how I calculated it
+```{r}
+lw<-length(d$weight) #this is 1000
+nw<-5 #we'll randomly choose samples of 5, like in the module
+dummy_weight <- NULL #this is our dummy variable to hold each sample
+for (i in 1:k){
+    dummy_weight[[i]]<-sample(d$weight,size=nh,replace=FALSE)
+}
+head(dummy_weight)
+```
+this is how you calculated it
+```{r}
+pop_weight <- NULL
+for (i in 1:k){
+    pop_weight[i] <- mean(dummy_weight[[i]])
+}
+mean(pop_weight)
+```
+this is how you said to calculate the mean
 ```{r}
 pop_v <- function(w) {
     sum((w - mean(w))^2)/(length(w))
@@ -49,8 +85,24 @@ a <- d$age
 meana <- mean(a)
 meana
 ```
-above is the mean age
-
+above is the mean age that I calculated
+```{r}
+la<-length(d$age) #this is 1000
+na<-5 #we'll randomly choose samples of 5, like in the module
+dummy_age <- NULL #this is our dummy variable to hold each sample
+for (i in 1:k){
+    dummy_age[[i]]<-sample(d$age,size=n,replace=FALSE)
+}
+head(dummy_age)
+```
+```{r}
+pop_age <- NULL
+for (i in 1:k){
+    pop_age[i] <- mean(dummy_age[[i]])
+}
+mean(pop_age)
+```
+this is how you told us to calculate mean
 ```{r}
 pop_v <- function(a) {
     sum((a - mean(a))^2)/(length(a))
@@ -67,8 +119,24 @@ z <- d$zombies_killed
 meanz <- mean(z)
 meanz
 ```
-above is the mean number of zombies killed
-
+above is the mean number of zombies killed I calculated
+```{r}
+la<-length(d$zombies_killed) #this is 1000
+na<-5 #we'll randomly choose samples of 5, like in the module
+dummy_zombies_killed <- NULL #this is our dummy variable to hold each sample
+for (i in 1:k){
+    dummy_zombies_killed[[i]]<-sample(d$zombies_killed,size=n,replace=FALSE)
+}
+head(dummy_zombies_killed)
+```
+```{r}
+pop_zombies_killed <- NULL
+for (i in 1:k){
+    pop_zombies_killed[i] <- mean(dummy_zombies_killed[[i]])
+}
+mean(pop_zombies_killed)
+```
+this is how you told us to calculate it
 ```{r}
 pop_v <- function(z) {
     sum((z - mean(z))^2)/(length(z))
@@ -146,14 +214,17 @@ above is the boxplot for years of education
 psh <- ggplot(data = d, aes(x = age, y = height))  
 psh <- psh + xlab("age") + ylab("height")  
 psh <- psh + geom_point()  
-psh <- psh + theme(legend.position = "bottom", legend.title = element_blank())  
-psh
-
+psh <- psh + theme(legend.position = "bottom", legend.title = element_blank())
+age_height <- psh + geom_smooth(method = "lm")
+age_height
+```
+```{r}
 psw <- ggplot(data = d, aes(x = age, y = weight))  
 psw <- psw + xlab("age") + ylab("weight")  
 psw <- psw + geom_point()  
 psw <- psw + theme(legend.position = "bottom", legend.title = element_blank())  
-psw
+age_weight <- psw + geom_smooth(method = "lm")
+age_weight
 ```
 The variable of hight andand weight to age both seem to be related. As age increases so does height. It looks like a positive linear coralation.  
 
@@ -169,7 +240,7 @@ here I took the min and hax for height so I could make my histograms
 ```{r}
 qqnorm(d$height, main="normal QQ plot for height")
 qqline(d$height, col="blue")
-hist(d$height, breaks = seq(from =50, to =100, by=5), probability= TRUE)
+hist(d$height, breaks = seq(from =50, to =100, by=1), probability= TRUE)
 ```
 The distrabutioin above for height looks normal
 ```{r}
@@ -212,7 +283,7 @@ qqnorm(d$zombies_killed, main="normal QQ plot for Zombies killed")
 qqline(d$zombies_killed, col="blue")
 hist(d$zombies_killed, breaks = seq(from =0, to =11, by=1), probability= TRUE)
 ```
-The distrabutioin above for number of zombies looks poisson
+The distrabutioin above for number of zombies looks bernoulli
 
 ```{r}
 minz <- min(d$years_of_education)
@@ -226,7 +297,7 @@ qqnorm(d$years_of_education, main="normal QQ plot for years of education")
 qqline(d$years_of_education, col="blue")
 hist(d$years_of_education, breaks = seq(from =0, to =11, by=1), probability= TRUE)
 ```
-The distrabutioin above for number of zombies looks poisson
+The distrabutioin above for number of zombies looks bernoulli
 #Zombies[5]
 ```{r}
 samp <- d[sample(nrow(d), 30, replace = FALSE, prob = NULL),  ]
@@ -301,44 +372,36 @@ cia
 ```
 above are the sample SD sample mean, SE and the CI is from 14.13943 to 25.17132f of age
 ```{r}
-sampz <- samp$zombies_killed
+sampz <- sample(d$zombies_killed,size=30,replace=FALSE)
 meansz <- mean(sampz)
 meansz
 
-sampvarz <- var(sampz)
-sampSDz <- sqrt(sampvarz)
-sampSDz
+sd(sampz)
 
-lambdaz <- (sum(sampz)/30)
-lengthz <- length(sampz)
-sez <- sqrt(lambdaz/lengthz)
-sez
-upperz <- lambdaz+ 1.96*sez
-lowerz <- lambdaz- 1.96*sez
-ciz <- c(lowerz, upperz)
-ciz
+set<-NULL  # sets up a dummy variable to hold our simulations
+n<-15
+for (i in 1:10000) {
+    set[i]<-mean(sample(sampz,n,replace=TRUE))
+}
+quantile(set,c(0.025,0.975))
 
 ```
-above are the sample SD mean, se and the ci is from 2.49903 to 3.766764 of zombies killed
+above are the sample SD mean, se and the ci is from zombies killed
 ```{r}
-sampy <- samp$years_of_education 
+sampy <- sample(d$years_of_education,size=30,replace=FALSE)
 meansy <- mean(sampy)
 meansy
 
-sampvary <- var(sampy)
-sampSDy <- sqrt(sampvary)
-sampSDy
+sd(sampy)
 
-lambday <- (sum(sampy)/30)
-lengthy <- length(sampy)
-sey <- sqrt(lambday/lengthy)
-sey
-uppery <- lambday+ 1.96*sey
-lowery <- lambday- 1.96*sey
-ciy <- c(lowery, uppery)
-ciy
+set<-NULL  # sets up a dummy variable to hold our simulations
+n<-15
+for (i in 1:10000) {
+    set[i]<-mean(sample(sampy,n,replace=TRUE))
+}
+quantile(set,c(0.025,0.975))
 ```
-above are the sample mean, sd, se and the ci is from 2.320452 to 3.546214 of years of education
+above are the sample mean, sd, se and the ci for years of education
 
 #Zombie[6]
 ```{r}
@@ -411,7 +474,7 @@ mean(new30education)
 sd(new30education)
 ```
 these are the mean and sd for the new samples of years of education
-these new sd are very similar to the se, they are not exact, but they are similar. all of these samples for the most part look normal more or less. Even the variables that looks like a poisson distrabutiom (the number of zombies killed and years of education) are now normal looking after taking the mean and sd of a sample 100 times 
+these new sd are very similar to the se, they are not exact, but they are similar. all of these samples for the most part look normal more or less. Even the variables that looks like a poisson distrabutiom (the number of zombies killed and years of education) are now normal looking after taking the mean and sd of a sample 100 times.
 
 
 
