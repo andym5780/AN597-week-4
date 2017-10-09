@@ -235,7 +235,7 @@ psh <- psh + theme(legend.position = "bottom", legend.title = element_blank())
 age_height <- psh + geom_smooth(method = "lm")
 age_height
 ```
-```{r}
+```{r, eval=FALSE}
 psw <- ggplot(data = d, aes(x = age, y = weight))  
 psw <- psw + xlab("age") + ylab("weight")  
 psw <- psw + geom_point()  
