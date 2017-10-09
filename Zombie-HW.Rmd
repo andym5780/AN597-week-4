@@ -388,12 +388,14 @@ cia <- c(lowera, uppera)
 cia
 ```
 above are the sample SD sample mean, SE and the CI is from 14.13943 to 25.17132f of age
-```{r}
+```{r, eval=FALSE}
 sampz <- sample(d$zombies_killed,size=30,replace=FALSE)
 meansz <- mean(sampz)
 meansz
 
 sd(sampz)
+
+se(sampz)
 
 set<-NULL  # sets up a dummy variable to hold our simulations
 n<-15
@@ -404,12 +406,14 @@ quantile(set,c(0.025,0.975))
 
 ```
 above are the sample SD mean, se and the ci is from zombies killed
-```{r}
+```{r, eval=FALSE}
 sampy <- sample(d$years_of_education,size=30,replace=FALSE)
 meansy <- mean(sampy)
 meansy
 
 sd(sampy)
+
+se(sampy)
 
 set<-NULL  # sets up a dummy variable to hold our simulations
 n<-15
